@@ -1,8 +1,4 @@
-import React, { useState } from "react";
 const Counter = (props) => {
-  console.log(props);
-  //const [value, setValue] = useState(props.value);
-  //назначаем значения
   const { value } = props;
 
   const formatValue = () => {
@@ -15,12 +11,10 @@ const Counter = (props) => {
   };
 
   const handleIncrement = () => {
-    //setValue((prevState) => prevState + 1);
-    console.log("hadle Increment");
+    props.onIncrement(props.id);
   };
   const handleDecrement = () => {
-    //setValue((prevState) => prevState - 1);
-    console.log("hadle Decrement");
+    props.onDecrement(props.id);
   };
 
   return (

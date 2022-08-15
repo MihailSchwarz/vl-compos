@@ -21,7 +21,23 @@ const CountersList = () => {
     console.log("handle reset");
     setCounters(initialState);
   };
+
+  // добавляет значение
+  const handleIncrement = (id) => {
+    const elementIndex = counters.findIndex((c) => c.id === id);
+    const newCounters = [...counters];
+    newCounters[elementIndex].value++;
+    setCounters(newCounters);
+  };
+
+  const handleDecrement = (id) => {
+    const elementIndex = counters.findIndex((c) => c.id === id);
+    const newCounters = [...counters];
+    newCounters[elementIndex].value--;
+    setCounters(newCounters);
+  };
   // обновить состояние
+  /*
   const handleUpdate = () => {
     const updatedState = [
       { id: 1, value: 1, name: "Ложка" },
@@ -31,20 +47,24 @@ const CountersList = () => {
       { id: 5, value: 5, name: "набор" },
     ];
     setCounters(updatedState);
-  };
+  };*/
   return (
     <>
       {counters.map((count) => (
         // ...count сразу передаём много параметров из массива
-        <Counter onDelete={handleDelete} {...count} />
+        <Counter
+          key={count.id}
+          onDelete={handleDelete}
+          onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
+          {...count}
+        />
       ))}
       <button className="btn-primary btn-sm m-2" onClick={handleReset}>
         Reset
       </button>
 
-      <button className="btn-primary btn-sm m-2" onClick={handleUpdate}>
-        Update
-      </button>
+      <button className="btn-primary btn-sm m-2">Update</button>
     </>
   );
 };
